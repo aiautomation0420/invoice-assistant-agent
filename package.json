@@ -7,6 +7,9 @@
     "node": ">=22.18"
   },
   "scripts": {
+    "app": "node --env-file-if-exists=.env src/app.ts",
+    "desktop": "node desktop/start.mjs",
+    "desktop:build": "electron-builder --win",
     "chat": "node --env-file-if-exists=.env src/chat.ts",
     "tool": "node --env-file-if-exists=.env scripts/tool.ts",
     "seed:recon": "node --env-file-if-exists=.env scripts/seed-recon.ts",
@@ -22,6 +25,54 @@
   },
   "devDependencies": {
     "@types/node": "^24.19.2",
+    "electron": "^44.10.0",
+    "electron-builder": "^26.18.0",
     "typescript": "^5.9.3"
+  },
+  "description": "AI agent for accounts payable: Claude + tools on invoice data, statement reconciliation, approvals with y/n confirmation",
+  "author": "aiautomation0420",
+  "main": "desktop/main.mjs",
+  "build": {
+    "appId": "com.aiautomation0420.invoiceassistant",
+    "productName": "Invoice Assistant",
+    "copyright": "Copyright © 2026 aiautomation0420",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "desktop/**",
+      "src/**",
+      "web/**",
+      "samples/**",
+      ".env.example",
+      "package.json"
+    ],
+    "asar": false,
+    "icon": "desktop/icon.png",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Invoice Assistant",
+      "artifactName": "InvoiceAssistant-Setup-${version}.exe"
+    },
+    "electronFuses": {
+      "runAsNode": false,
+      "enableNodeOptionsEnvironmentVariable": false,
+      "enableNodeCliInspectArguments": false,
+      "enableCookieEncryption": true
+    }
   }
 }

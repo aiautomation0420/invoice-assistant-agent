@@ -2,7 +2,8 @@
 import { appendFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 
-const LOG_DIR = join(import.meta.dirname, "..", "logs");
+// The desktop app sets INVOICE_ASSISTANT_DATA to its own writable folder; otherwise logs/ sits in the project.
+const LOG_DIR = join(process.env.INVOICE_ASSISTANT_DATA || join(import.meta.dirname, ".."), "logs");
 
 /** A problem the user (or Claude) can fix. Its message is safe to show as-is. */
 export class UserError extends Error {}

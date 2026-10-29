@@ -6,7 +6,7 @@ import { toCsv } from "../shared/report.ts";
 import { parseDateKey } from "../shared/week.ts";
 
 const ROOT = join(import.meta.dirname, "..", "..");
-export const REPORTS_DIR = join(ROOT, "reports");
+export const REPORTS_DIR = join(process.env.INVOICE_ASSISTANT_DATA || ROOT, "reports"); // desktop app: its own data folder
 
 export function statementsDir() {
   return resolve(ROOT, process.env.STATEMENTS_DIR || "samples");

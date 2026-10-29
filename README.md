@@ -1,6 +1,6 @@
 # Invoice Assistant Agent
 
-**An AI agent for accounts payable, in the terminal.** Ask it about invoices in plain English, approve or reject flagged ones (with a y/n confirmation and a reason), and reconcile vendor and bank statements the way an AP team does, with exact matching rules in code and Claude explaining the results.
+**An AI agent for accounts payable: a Windows desktop app, a web app, and a terminal chat.** Ask it about invoices in plain English, approve or reject flagged ones (with a y/n confirmation and a reason), and reconcile vendor and bank statements the way an AP team does, with exact matching rules in code and Claude explaining the results.
 
 Part 3 of my automation portfolio → [lovergil-perillo-portfolio.vercel.app](https://lovergil-perillo-portfolio.vercel.app)
 
@@ -28,6 +28,29 @@ I'm a bookkeeper (accounts payable and receivable). The questions this agent ans
 - **"Draft the email to the vendor."** The items come straight from the reconciliation, so nothing is retyped and nothing is made up.
 
 It never invents numbers. Every amount, invoice and reconciliation result comes from a tool that read the database or the statement file.
+
+## Web app
+
+`npm run app` opens it at **http://localhost:3210**. It uses the same agent, tools and safety rules as the terminal chat:
+
+- **Agent steps panel:** the GUI version of `--verbose`. Each tool call appears live, with its input, its result and the token use. You can turn it off.
+- **Real dialogs for decisions:** approving or rejecting opens a confirmation dialog, then a reason box (required for rejections and invoices over $5,000). The program asks these questions, not Claude. Closing the tab counts as "no".
+- **Cards for results you act on:** email drafts with a Copy button (marked *Not sent*), and saved reconciliation reports with **Download CSV**.
+- **Same look as the dashboard:** Inter, black/white/gray, the same status colors, light and dark mode, keyboard and screen-reader friendly, and it works on a phone.
+- **Local only:** it listens on 127.0.0.1, rejects requests from other websites (Host and Origin checks), and has a strict Content-Security-Policy. Answers are escaped before they're formatted.
+
+## Desktop app (Windows)
+
+`npm run desktop:build` builds `dist/InvoiceAssistant-Setup-0.1.0.exe`, an installer with a Start-menu and Desktop icon. The app is built with Electron: it runs the same local server inside the app, on a free port on 127.0.0.1, and shows it in its own window. Same agent, tools and safety rules.
+
+- **Settings live outside the installer.** On first launch the app creates `%APPDATA%Invoice Assistant.env` and asks you to fill in your Supabase values. Keys are never packaged; the build includes only `desktop/`, `src/`, `web/`, `samples/` and `.env.example`, and it was checked for key values.
+- **Logs and saved reports** go to the same app-data folder (*File → Open reports folder*).
+- **Locked-down window:** no Node access in the page (context isolation, sandbox), it can't be navigated away from the app, and any other link opens in your normal browser.
+- **One window:** opening it a second time brings back the window that's already open.
+- **Subscription mode** needs Claude Code logged in on that computer. **API mode** needs `AI_PROVIDER=anthropic-api` and a key in the settings file.
+- **Unsigned:** the installer isn't code-signed, so Windows SmartScreen shows "Unknown publisher" (*More info → Run anyway*). Signing needs a paid certificate.
+- **Statements:** the installer bundles the sample statements from the time of the build. After `npm run seed:recon`, rebuild, or set `STATEMENTS_DIR` in the app's settings file to the project's `samples` folder.
+- `npm run desktop` runs the desktop app straight from the project, without installing.
 
 ## How it connects to my other two projects
 
@@ -133,7 +156,9 @@ npm install
 cp .env.example .env          # SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY (+ SUPABASE_SECRET_KEY to approve/reject and seed)
 npm test                      # no database, no AI, no cost
 npm run tool -- search_invoices status=flagged     # one tool, no AI
-npm run chat                  # the agent
+npm run desktop               # the desktop app (or npm run desktop:build for the Windows installer)
+npm run app                   # the web app → http://localhost:3210
+npm run chat                  # the same agent in the terminal
 npm run chat -- --verbose     # shows every tool call, its result, and token use per question
 ```
 
@@ -141,7 +166,7 @@ npm run chat -- --verbose     # shows every tool call, its result, and token use
 - **API mode:** set `AI_PROVIDER=anthropic-api` and `ANTHROPIC_API_KEY`.
 - **Database (once):** the invoice tables come from the [dashboard project](https://lovergil-perillo-portfolio.vercel.app). Then run [supabase/payments.sql](supabase/payments.sql) in the Supabase SQL Editor, followed by `npm run seed:recon`.
 
-Node 22.18+ runs the TypeScript directly; there's no build step. There are 4 runtime dependencies: `@anthropic-ai/claude-agent-sdk`, `@anthropic-ai/sdk`, `@supabase/supabase-js` and `zod`.
+Node 22.18+ runs the TypeScript directly; there's no build step. The web app is plain HTML/CSS/JS served by Node's built-in server. There are 4 runtime dependencies: `@anthropic-ai/claude-agent-sdk`, `@anthropic-ai/sdk`, `@supabase/supabase-js` and `zod`.
 
 ## Sample conversation
 
@@ -180,10 +205,11 @@ Reason (required):
 
 ## Tests and eval
 
-**Tests:** `npm test` runs 32 tests in about a second. They use no database, no AI and cost nothing.
+**Tests:** `npm test` runs 38 tests in about a second. They use no database, no AI and cost nothing.
 - every tool, against a fake in-memory database
 - the agent loop, with a fake Claude that replays scripted responses: tool calls, bad input, follow-ups, the 8-call limit, errors rolled back
 - approve/reject with the y/n and reason rules
+- the web server: streamed steps, the y/n and reason handshake with the browser, a closed tab counting as "no", and the local-only checks
 - file-path safety
 - reconciliation: statements are generated from random invoice sets, and the test checks that **every planted difference is found and nothing else**, with the balance difference fully explained
 
@@ -249,6 +275,8 @@ Rules:
 ```
 src/
   chat.ts              terminal chat, --verbose, the y/n and reason prompts
+  app.ts · server.ts   web app: local server, streamed turns, y/n and reason over HTTP
+desktop/               main.mjs (Electron window around the same server) · start.mjs · icon
   agent.ts             system prompt, 8-call safety limit, what both modes share
   providers/           anthropic-api.ts (hand-written loop) · claude-code.ts (Agent SDK) · index.ts (picks one)
   tools/               one file per tool + index.ts (the list and the input check)
@@ -256,6 +284,7 @@ src/
   data.ts              every Supabase read/write
   safety.ts            friendly errors, logs/app.log, key masking
   shared/              copied from the dashboard: config, format, week, report math
+web/                   index.html · app.css · app.js (the browser UI, no framework)
 scripts/               tool.ts (run one tool) · seed-recon.ts · eval.ts
 supabase/payments.sql  payments table + review columns + RLS
 samples/               generated statements + planted-differences.json

@@ -1,0 +1,35 @@
+date,type,reference,description,amount
+2026-10-01,opening_balance,,Balance brought forward,1678.58
+2026-10-01,invoice,SUM-17116,Invoice,2448.22
+2026-10-01,invoice,SUM-17117,Invoice,2714.94
+2026-10-01,payment,ACH2026100143,Payment received - ACH,3016.58
+2026-10-02,invoice,SUM-17129,Invoice,2826.91
+2026-10-03,invoice,SUM-17122,Invoice,2297.65
+2026-10-05,payment,CHK-10552,Payment received - CHECK,1505.34
+2026-10-08,invoice,SUM-17140,Invoice,3966.06
+2026-10-09,invoice,SUM-17138,Invoice,3554.36
+2026-10-09,invoice,SUM-17142,Invoice,826.06
+2026-10-10,payment,ACH2026100162,Payment received - ACH,2159.84
+2026-10-11,payment,ACH2026100160,Payment received - ACH,1347.49
+2026-10-12,invoice,SUM-17146,Invoice,4107.82
+2026-10-13,payment,ACH2026100161,Payment received - ACH,1062.16
+2026-10-14,payment,CHK-10571,Payment received - CHECK,4447.14
+2026-10-16,invoice,SUM-17162,Invoice,1392.18
+2026-10-16,payment,WIRE-2026-10-173,Payment received - WIRE,3253.64
+2026-10-17,invoice,SUM-17158,Invoice,3731.96
+2026-10-18,invoice,SUM-17172,Invoice,2090.58
+2026-10-18,payment,ACH2026100176,Payment received - ACH,6224.40
+2026-10-19,invoice,SUM-17163,Invoice,11771.81
+2026-10-19,invoice,SUM-17177,Invoice,604.18
+2026-10-19,payment,ACH2026100182,Payment received - ACH,3554.36
+2026-10-21,invoice,SUM-17191,Invoice,2861.78
+2026-10-21,payment,ACH2026100177,Payment received - ACH,3620.48
+2026-10-23,invoice,SUM-17184,Invoice,3933.12
+2026-10-23,invoice,SUM-17200,Invoice,4290.61
+2026-10-24,invoice,SUM-17197,Invoice,3944.84
+2026-10-25,invoice,SUM-17186,Invoice,2210.16
+2026-10-25,payment,ACH2026100188,Payment received - ACH,2619.57
+2026-10-27,invoice,SUM-17248,Invoice,1996.41
+2026-10-29,payment,ACH2026100200,Payment received - ACH,2826.91
+2026-10-29,payment,ACH2026100207,Payment received - ACH,3989.52
+2026-10-29,closing_balance,,Balance due,23620.80

@@ -1,0 +1,27 @@
+date,type,reference,description,amount
+2026-10-01,opening_balance,,Balance brought forward,4476.57
+2026-10-01,invoice,CIT-16720,Invoice,1587.98
+2026-10-02,invoice,CIT-16729,Invoice,4522.25
+2026-10-02,invoice,CIT-16733,Invoice,1937.65
+2026-10-04,invoice,CIT-16717,Invoice,4163.72
+2026-10-04,invoice,CIT-16752,Invoice,2051.34
+2026-10-07,invoice,CIT-16747,Invoice,5500.15
+2026-10-08,payment,CHK-10555,Payment received - CHECK,3890.44
+2026-10-09,invoice,CIT-16769,Invoice,3914.63
+2026-10-10,payment,ACH2026100159,Payment received - ACH,2248.63
+2026-10-12,invoice,CIT-16760,Invoice,3856.49
+2026-10-12,invoice,CIT-16855,Invoice,1883.59
+2026-10-12,payment,ACH2026100166,Payment received - ACH,4522.25
+2026-10-13,invoice,CIT-16778,Invoice,4109.75
+2026-10-13,payment,CHK-10569,Payment received - CHECK,3373.13
+2026-10-18,invoice,CIT-16780,Invoice,3701.38
+2026-10-18,payment,ACH2026100181,Payment received - ACH,2333.24
+2026-10-20,invoice,CIT-16785,Invoice,3489.59
+2026-10-20,invoice,CIT-16784,Invoice,2939.51
+2026-10-26,invoice,CIT-16786,Invoice,900.96
+2026-10-26,payment,ACH2026100189,Payment received - ACH,2296.59
+2026-10-28,payment,ACH2026100206,Payment received - ACH,2051.34
+2026-10-29,payment,ACH2026100194,Payment received - ACH,1587.98
+2026-10-29,payment,CHK-10604,Payment received - CHECK,4163.72
+2026-10-29,payment,WIRE-2026-10-209,Payment received - WIRE,2939.51
+2026-10-29,closing_balance,,Balance due,19628.73

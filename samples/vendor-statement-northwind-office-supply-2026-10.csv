@@ -1,0 +1,43 @@
+date,type,reference,description,amount
+2026-10-01,opening_balance,,Balance brought forward,1120.32
+2026-10-01,invoice,NW-17489,Invoice,862.53
+2026-10-02,invoice,NW-17491,Invoice,918.70
+2026-10-02,invoice,NW-17497,Invoice,661.52
+2026-10-03,invoice,NW-17512,Invoice,209.95
+2026-10-03,invoice,NW-17505,Invoice,842.03
+2026-10-03,invoice,NW-17520,Invoice,532.59
+2026-10-06,invoice,NW-17510,Invoice,719.43
+2026-10-08,invoice,NW-17524,Invoice,91.55
+2026-10-10,invoice,NW-17553,Invoice,601.82
+2026-10-10,invoice,NW-17537,Invoice,588.58
+2026-10-11,invoice,NW-17546,Invoice,334.62
+2026-10-12,invoice,NW-17555,Invoice,595.81
+2026-10-16,invoice,NW-17558,Invoice,338.42
+2026-10-16,payment,ACH2026100168,Payment received - ACH,657.78
+2026-10-16,payment,ACH2026100172,Payment received - ACH,465.71
+2026-10-17,invoice,NW-17582,Invoice,268.12
+2026-10-18,invoice,NW-17587,Invoice,404.97
+2026-10-18,invoice,NW-17566,Invoice,969.36
+2026-10-19,invoice,NW-17609,Invoice,680.13
+2026-10-19,invoice,NW-17573,Invoice,183.27
+2026-10-20,invoice,NW-17695,Invoice,955.73
+2026-10-21,invoice,NW-17594,Invoice,380.14
+2026-10-21,invoice,NW-17599,Invoice,697.28
+2026-10-21,invoice,NW-17608,Invoice,397.49
+2026-10-21,payment,CHK-10580,Payment received - CHECK,287.40
+2026-10-23,invoice,NW-17620,Invoice,460.60
+2026-10-23,invoice,NW-17630,Invoice,409.60
+2026-10-26,invoice,NW-17613,Invoice,771.60
+2026-10-27,invoice,NW-17623,Invoice,846.31
+2026-10-27,payment,ACH2026100190,Payment received - ACH,509.46
+2026-10-27,payment,CHK-10601,Payment received - CHECK,209.95
+2026-10-28,invoice,NW-17622,Invoice,252.62
+2026-10-28,payment,ACH2026100196,Payment received - ACH,862.53
+2026-10-28,payment,CHK-10597,Payment received - CHECK,338.42
+2026-10-29,payment,ACH2026100198,Payment received - ACH,268.12
+2026-10-29,payment,ACH2026100199,Payment received - ACH,918.70
+2026-10-29,payment,ACH2026100202,Payment received - ACH,842.03
+2026-10-29,payment,ACH2026100203,Payment received - ACH,532.59
+2026-10-29,payment,ACH2026100211,Payment received - ACH,644.43
+2026-10-29,payment,ACH2026100213,Payment received - ACH,397.49
+2026-10-29,closing_balance,,Balance due,9160.48

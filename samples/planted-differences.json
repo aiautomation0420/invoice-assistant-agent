@@ -1,0 +1,121 @@
+{
+  "generated_at": "2026-10-29T06:50:22.818Z",
+  "month": "2026-10",
+  "period": {
+    "from": "2026-10-01",
+    "to": "2026-10-29"
+  },
+  "note": "Every difference planted in the sample statements. Tests and the eval check that the reconciliation finds all of them.",
+  "vendor_statements": [
+    {
+      "vendor": "Summit Logistics",
+      "file": "vendor-statement-summit-logistics-2026-10.csv",
+      "expected_balance_difference": -1042.05,
+      "differences": [
+        {
+          "kind": "missing_in_our_records",
+          "reference": "SUM-17248",
+          "theirs": 1996.41
+        },
+        {
+          "kind": "missing_from_their_statement",
+          "reference": "SUM-17166",
+          "ours": 3989.52
+        },
+        {
+          "kind": "amount_difference",
+          "reference": "SUM-17163",
+          "ours": 11646.81,
+          "theirs": 11771.81
+        },
+        {
+          "kind": "unapplied_payment",
+          "reference": "ACH2026100183",
+          "ours": 826.06
+        }
+      ]
+    },
+    {
+      "vendor": "Northwind Office Supply",
+      "file": "vendor-statement-northwind-office-supply-2026-10.csv",
+      "expected_balance_difference": 1182.79,
+      "differences": [
+        {
+          "kind": "missing_in_our_records",
+          "reference": "NW-17695",
+          "theirs": 955.73
+        },
+        {
+          "kind": "missing_from_their_statement",
+          "reference": "NW-17528",
+          "ours": 509.46
+        },
+        {
+          "kind": "amount_difference",
+          "reference": "NW-17510",
+          "ours": 644.43,
+          "theirs": 719.43
+        },
+        {
+          "kind": "unapplied_payment",
+          "reference": "ACH2026100167",
+          "ours": 661.52
+        }
+      ]
+    },
+    {
+      "vendor": "Crestline IT Services",
+      "file": "vendor-statement-crestline-it-services-2026-10.csv",
+      "expected_balance_difference": 649.09,
+      "differences": [
+        {
+          "kind": "missing_in_our_records",
+          "reference": "CIT-16855",
+          "theirs": 1883.59
+        },
+        {
+          "kind": "missing_from_their_statement",
+          "reference": "CIT-16742",
+          "ours": 3258.12
+        },
+        {
+          "kind": "amount_difference",
+          "reference": "CIT-16747",
+          "ours": 5375.15,
+          "theirs": 5500.15
+        },
+        {
+          "kind": "unapplied_payment",
+          "reference": "WIRE-2026-10-156",
+          "ours": 1898.62
+        }
+      ]
+    }
+  ],
+  "bank_statement": {
+    "file": "bank-statement-2026-10.csv",
+    "differences": [
+      {
+        "kind": "not_yet_cleared",
+        "reference": "ACH2026100213",
+        "ours": 397.49
+      },
+      {
+        "kind": "unexplained_bank_item",
+        "reference": "ACH DEBIT RAPID PRINT CO",
+        "bank": 285.93
+      },
+      {
+        "kind": "amount_difference",
+        "reference": "CHK-10580",
+        "ours": 287.4,
+        "bank": 278.4
+      },
+      {
+        "kind": "date_difference",
+        "reference": "CHK-10549",
+        "ours": 4698.6
+      }
+    ]
+  }
+}

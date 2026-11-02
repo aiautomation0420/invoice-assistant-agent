@@ -6,8 +6,11 @@ Copy these into this project's public images folder (wherever the other project 
 
 - `D:\AI's\ClaudeCode\CodeBase-Agent\invoice-assistant-agent\docs\screenshots\web-app-light.png` (main image)
 - `D:\AI's\ClaudeCode\CodeBase-Agent\invoice-assistant-agent\docs\screenshots\web-app-dark.png` (dark mode, if the site switches images by theme or has a gallery)
+- `D:\AI's\ClaudeCode\CodeBase-Agent\invoice-assistant-agent\docs\screenshots\web-app-reconcile.png` (the agent at work: use on the project page, e.g. in the "What it does" or gallery section)
 
-Both are 1440×900 screenshots of the web app's start screen. Alt text: "Invoice Assistant web app: a chat for accounts payable with suggested questions about flagged invoices, vendor spend and statement reconciliation."
+The first two are the web app's start screen (2880×1800, retina 1440×900). Alt text: "Invoice Assistant web app: a chat for accounts payable with suggested questions about flagged invoices, vendor spend and statement reconciliation."
+The third is a tall screenshot (2880×2556) of a real answer. Alt text: "The agent reconciles Northwind Office Supply's October statement: 28 items matched, 4 differences with a suggested action each, and the $2,217.68 balance difference fully explained."
+Optimize the images the way the site already does for the other projects (e.g. next/image or WebP) so the page stays fast.
 
 ## Project details
 
@@ -36,7 +39,7 @@ Make it clear on the card and the project page that this is both a web app and a
 - A hand-written tool-use loop, with a limit of 8 tool calls per question. Bad tool inputs are checked with zod and sent back to Claude to fix.
 - Two AI modes, one setting: Claude subscription (Agent SDK, local personal use) or Anthropic API (the deployable path).
 - Safety: read-only by default (demo rows, row-level security), human-in-the-loop approvals, statement files restricted to one folder, keys never logged, local web app only (127.0.0.1, Host/Origin checks, strict CSP).
-- Tested: 38 automated tests (no database, no AI) and a 13-question eval where Claude is checked for calling the right tool and giving the right fact. All 13 pass.
+- Tested: 39 automated tests (no database, no AI) and a 13-question eval where Claude is checked for calling the right tool and giving the right fact. All 13 pass.
 
 **How it connects to the other two projects**
 Project 1 (n8n) **writes** invoices to Supabase, Project 2 (dashboard) **shows** them, and Project 3 (this agent) **answers questions and takes actions** on them. All three share one data contract and the same rules ($5,000 approval limit, Monday-to-Sunday weeks in Asia/Manila time).

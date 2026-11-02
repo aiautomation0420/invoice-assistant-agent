@@ -13,7 +13,7 @@ export async function vendorRecon(data: Data, file: string, vendor: string) {
   const lines = readRows<StatementLine>(file, ["date", "type", "reference", "description", "amount"], (r) => {
     const type = r.type.toLowerCase() as StatementLine["type"];
     if (!LINE_TYPES.includes(type)) throw new Error(`type "${r.type}" should be one of ${LINE_TYPES.join(", ")}`);
-    return { date: isoDate(r.date), type, reference: r.reference, description: r.description, amount: Math.abs(amount(r.amount)) };
+    return { date: isoDate(r.date), type, reference: r.reference, description: r.description, amount: type.endsWith("_balance") ? amount(r.amount) : Math.abs(amount(r.amount)) }; // a balance can be negative (we overpaid); lines are signed either way by vendors
   });
   if (!lines.some((l) => l.type === "closing_balance")) throw new UserError(`"${file}" has no closing_balance row, so the balance can't be compared.`);
 

@@ -42,7 +42,7 @@ for (const seed of ["2026-10", "alpha", "beta", "gamma"]) {
     const invoices = demoInvoices(seed);
     const built = buildRecon(invoices, { month: "2026-10", today: "2026-10-29", random: seeded(seed) });
     assert.equal(built.vendorStatements.length, 3);
-    assert.equal(built.vendorStatements[0].vendor, "Summit Logistics");
+    assert.equal(built.vendorStatements[0].vendor, "Northwind Office Supply");
 
     for (const statement of built.vendorStatements) {
       const lines: StatementLine[] = toLines(statement.csv).map((r) => ({ ...r, amount: Number(r.amount) }) as StatementLine);
@@ -137,17 +137,35 @@ test("reconcile tools + draft_vendor_email work end to end on generated files (f
   try {
     for (const s of built.vendorStatements) writeFileSync(join(dir, s.file), s.csv);
     const ctx = { data: fakeData(invoices, built.payments), confirm: noConfirm, ask: noAnswer };
-    const summit = built.vendorStatements[0];
-    const r = (await runTool("reconcile_vendor_statement", { file: summit.file, vendor: "Summit" }, ctx)).result as any;
-    assert.equal(r.vendor, "Summit Logistics");
+    const northwind = built.vendorStatements[0];
+    const r = (await runTool("reconcile_vendor_statement", { file: northwind.file, vendor: "Northwind" }, ctx)).result as any;
+    assert.equal(r.vendor, "Northwind Office Supply");
     assert.equal(r.balance.unexplained, "$0.00");
     assert.deepEqual(Object.values(r.differences_count), [1, 1, 1, 1, 0]);
 
-    const email = (await runTool("draft_vendor_email", { vendor: "Summit", statement_file: summit.file, include: ["missing_in_our_records"] }, ctx)).result as any;
-    const missing = summit.differences.find((d) => d.kind === "missing_in_our_records")!;
+    const email = (await runTool("draft_vendor_email", { vendor: "Northwind", statement_file: northwind.file, include: ["missing_in_our_records"] }, ctx)).result as any;
+    const missing = northwind.differences.find((d) => d.kind === "missing_in_our_records")!;
     assert.equal(email.sent, false);
     assert.match(email.body, new RegExp(missing.reference));
     assert.doesNotMatch(email.body, /Payments we sent/);
+  } finally {
+    delete process.env.STATEMENTS_DIR;
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("a negative closing balance (we overpaid) keeps its sign", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "recon-"));
+  process.env.STATEMENTS_DIR = dir;
+  try {
+    writeFileSync(join(dir, "credit.csv"), "date,type,reference,description,amount\r\n2026-10-01,opening_balance,,,0\r\n2026-10-05,invoice,SUM-1,Invoice,100\r\n2026-10-08,payment,ACH1,Payment,-150\r\n2026-10-31,closing_balance,,,-50\r\n");
+    const inv = invoice({ vendor: "Summit Logistics", invoice_number: "SUM-1", invoice_date: "2026-10-05", total: 100 });
+    const pay = { payment_id: "P1", invoice_id: inv.id, vendor: "Summit Logistics", amount: 150, paid_date: "2026-10-08", method: "ACH", reference: "ACH1" };
+    const ctx = { data: fakeData([inv], [pay]), confirm: noConfirm, ask: noAnswer };
+    const r = (await runTool("reconcile_vendor_statement", { file: "credit.csv", vendor: "Summit" }, ctx)).result as any;
+    assert.equal(r.balance.their_closing_balance, "-$50.00");
+    assert.equal(r.balance.unexplained, "$0.00");
+    assert.equal(r.statement_math_warning, undefined);
   } finally {
     delete process.env.STATEMENTS_DIR;
     rmSync(dir, { recursive: true, force: true });

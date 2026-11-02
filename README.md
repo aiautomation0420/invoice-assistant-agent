@@ -5,17 +5,17 @@
 Part 3 of my automation portfolio → [lovergil-perillo-portfolio.vercel.app](https://lovergil-perillo-portfolio.vercel.app)
 
 ```
-You: Reconcile Summit Logistics' October statement.
+You: Reconcile Northwind Office Supply's October statement.
   → list_statement_files {}
-  → reconcile_vendor_statement {"file":"vendor-statement-summit-logistics-2026-10.csv","vendor":"Summit"}
+  → reconcile_vendor_statement {"file":"vendor-statement-northwind-office-supply-2026-10.csv","vendor":"Northwind"}
 
-Assistant: 30 items matched, 4 differences:
+Assistant: 28 items matched, 4 differences:
 | Issue                                   | Reference      | Ours       | Theirs     | Suggested action                         |
-| Amount differs                          | SUM-17163      | $11,646.81 | $11,771.81 | Ask for a corrected invoice or credit memo |
-| On their statement, not in our records  | SUM-17248      | —          | $1,996.41  | Ask for a copy of the invoice            |
-| In our records, not on their statement  | SUM-17166      | $3,989.52  | —          | Send a copy and ask if it's in their system |
-| Payment they haven't applied            | ACH2026100183  | $826.06    | —          | Send the remittance and ask them to apply it |
-Balance: theirs $23,620.80, ours $24,662.85, difference -$1,042.05: fully explained, $0.00 unexplained.
+| Amount differs                          | NW-17493       | $321.45    | $346.45    | Ask for a corrected invoice or credit memo |
+| On their statement, not in our records  | NW-17627       | —          | $2,212.39  | Ask for a copy of the invoice            |
+| In our records, not on their statement  | NW-17537       | $226.29    | —          | Send a copy and ask if it's in their system |
+| Payment they haven't applied            | ACH2026100170  | $206.58    | —          | Send the remittance and ask them to apply it |
+Balance: theirs -$350.20, ours -$2,567.88, difference $2,217.68: fully explained, $0.00 unexplained.
 ```
 
 ## Why it's useful for an AP team
@@ -24,7 +24,7 @@ I'm a bookkeeper (accounts payable and receivable). The questions this agent ans
 
 - **"Which invoices are waiting for me, and why were they flagged?"** The agent explains each flag in plain English and shows the actual math that doesn't add up.
 - **"How much do we owe Summit, and what's overdue?"** Overdue means approved for payment, past the due date and not fully paid, worked out from real payment records.
-- **"Does the vendor's statement agree with our books?"** Month-end reconciliation usually means two spreadsheets side by side for an hour. Here it takes seconds, and every difference comes with the next step ("Ask Summit for a copy of SUM-17248").
+- **"Does the vendor's statement agree with our books?"** Month-end reconciliation usually means two spreadsheets side by side for an hour. Here it takes seconds, and every difference comes with the next step ("Ask Northwind for a copy of NW-17627").
 - **"Draft the email to the vendor."** The items come straight from the reconciliation, so nothing is retyped and nothing is made up.
 
 It never invents numbers. Every amount, invoice and reconciliation result comes from a tool that read the database or the statement file.
@@ -229,9 +229,9 @@ Latest run: **13/13 passed** (claude-code mode, `claude-sonnet-5-5`, Oct 29, 202
 | 8 | Have there been any workflow errors recently? | `list_errors` | The failed step |
 | 9 | Why was invoice INV-99999 flagged? | `get_invoice` | Says it wasn't found (no inventing) |
 | 10 | Show me what was approved or rejected this week and why. | `search_invoices` | The reviewed invoice |
-| 11 | Reconcile Summit Logistics' October statement. | `reconcile_vendor_statement` | All 4 planted differences |
+| 11 | Reconcile Northwind Office Supply's October statement. | `reconcile_vendor_statement` | All 4 planted differences |
 | 12 | Reconcile the October bank statement. | `reconcile_bank_statement` | All 4 planted differences |
-| 13 | Draft an email to Summit asking for the missing invoices. | `draft_vendor_email` | The missing invoice number |
+| 13 | Draft an email to Northwind asking for the missing invoices. | `draft_vendor_email` | The missing invoice number |
 
 ## Data contract
 

@@ -1,0 +1,22 @@
+date,type,reference,description,amount
+2026-10-01,opening_balance,,Balance brought forward,3400.89
+2026-10-01,invoice,MFC-14845,Invoice,2041.23
+2026-10-02,invoice,MFC-14963,Invoice,1926.67
+2026-10-04,invoice,MFC-14850,Invoice,1990.32
+2026-10-06,payment,ACH2026100144,Payment received - ACH,1771.45
+2026-10-07,invoice,MFC-14862,Invoice,2176.35
+2026-10-11,invoice,MFC-14876,Invoice,2159.52
+2026-10-11,invoice,MFC-14872,Invoice,6881.18
+2026-10-12,invoice,MFC-14869,Invoice,1667.24
+2026-10-13,invoice,MFC-14863,Invoice,1760.81
+2026-10-18,invoice,MFC-14889,Invoice,1275.76
+2026-10-18,invoice,MFC-14881,Invoice,1969.28
+2026-10-18,invoice,MFC-14897,Invoice,1162.33
+2026-10-19,payment,ACH2026100164,Payment received - ACH,1491.15
+2026-10-20,payment,ACH2026100159,Payment received - ACH,1949.54
+2026-10-21,payment,CHK-10567,Payment received - CHECK,1592.24
+2026-10-23,invoice,MFC-14902,Invoice,1939.86
+2026-10-29,payment,ACH2026100181,Payment received - ACH,1162.33
+2026-10-31,payment,ACH2026100184,Payment received - ACH,1816.00
+2026-10-31,payment,ACH2026100188,Payment received - ACH,1939.86
+2026-10-31,closing_balance,,Balance due,18628.87

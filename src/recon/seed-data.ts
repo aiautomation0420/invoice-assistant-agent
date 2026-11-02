@@ -9,7 +9,7 @@ export type NewPayment = Payment & { is_demo: true };
 export type PlantedItem = { kind: string; reference: string; ours?: number; theirs?: number; bank?: number };
 
 const VENDOR_COUNT = 3;
-const PREFERRED_VENDOR = "Summit Logistics"; // the vendor in the example questions
+const PREFERRED_VENDOR = "Northwind Office Supply"; // the vendor in the example questions
 const UNEXPLAINED_PAYEE = "RAPID PRINT CO"; // a sender in the demo data that isn't an approved vendor
 
 /** Small seeded random generator, so the same invoices + month give the same files. */

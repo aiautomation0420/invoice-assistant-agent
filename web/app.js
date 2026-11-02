@@ -123,14 +123,14 @@ function suggestionGroups(month) {
   return [
     ["Invoices", ["Which invoices are flagged and waiting for review?", "What's overdue?", "Show me what was approved or rejected this week and why."]],
     ["Vendors & reports", ["How much did we spend with Summit Logistics this month?", "Which vendors send the most problem invoices?", "What were the top problem reasons last week?"]],
-    ["Reconciliation", [`Reconcile Summit Logistics' ${month} statement.`, `Reconcile the ${month} bank statement.`, "Draft an email to Summit asking for the missing invoices."]],
+    ["Reconciliation", [`Reconcile Northwind Office Supply's ${month} statement.`, `Reconcile the ${month} bank statement.`, "Draft an email to Northwind asking for the missing invoices."]],
     ["System", ["Have there been any workflow errors recently?"]],
   ];
 }
 
 const STARTERS = (month) => [
   ["Review", "Which invoices are flagged and waiting for review?"],
-  ["Reconcile", `Reconcile Summit Logistics' ${month} statement.`],
+  ["Reconcile", `Reconcile Northwind Office Supply's ${month} statement.`],
   ["Spend", "How much did we spend with Summit Logistics this month?"],
   ["Bank", `Reconcile the ${month} bank statement.`],
 ];

@@ -88,7 +88,7 @@ async function buildCases(): Promise<Case[]> {
   const missing = vendor.differences.find((d: any) => d.kind === "missing_in_our_records").reference;
   const bankFact = (d: any) => (d.kind === "unexplained_bank_item" ? [d.reference, "Rapid Print"] : d.reference);
   cases.push(
-    { name: "Reconcile vendor statement", ask: [`Reconcile ${vendor.vendor}' ${monthName} statement.`], tools: ["reconcile_vendor_statement"], facts: vendor.differences.map((d: any) => d.reference) },
+    { name: "Reconcile vendor statement", ask: [`Reconcile ${vendor.vendor}'s ${monthName} statement.`], tools: ["reconcile_vendor_statement"], facts: vendor.differences.map((d: any) => d.reference) },
     { name: "Reconcile bank statement", ask: [`Reconcile the ${monthName} bank statement.`], tools: ["reconcile_bank_statement"], facts: planted.bank_statement.differences.map(bankFact) },
     { name: "Draft email (missing invoices)", ask: [`Draft an email to ${vendor.vendor.split(" ")[0]} asking for the missing invoices from their ${monthName} statement.`], tools: ["draft_vendor_email"], facts: [missing] },
   );
